@@ -132,15 +132,11 @@ check_ssl() {
     fi
 }
 
+# Print status message
+echo "Script is running..."
+
 # Print header
 printf "\n%bSSL Certificate Status Report%b\n\n" "${BLUE}" "${NC}"
-
-# Print header
-printf "%-${COL1}s  %-${COL2}s  %-${COL3}s  %-${COL4}s  %-${COL5}s\n" \
-    "Domain" "Expiry" "Days" "Status" "Certificate Authority"
-
-# Print header separator
-printf "%$(($COL1+$COL2+$COL3+$COL4+$COL5+10))s\n" | tr " " "-"
 
 # Process URLs
 if [ $# -ne 1 ]; then
@@ -148,14 +144,19 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-echo "Script is running..."
-
 while IFS= read -r url || [ -n "$url" ]; do
     [[ -z "$url" || "$url" =~ ^[[:space:]]*# ]] && continue
     domain=$(get_domain "$url")
     echo "Checking SSL for domain: $domain"
     check_ssl "$domain" 2>/dev/null
 done < "$1"
+
+# Print header
+printf "%-${COL1}s  %-${COL2}s  %-${COL3}s  %-${COL4}s  %-${COL5}s\n" \
+    "Domain" "Expiry" "Days" "Status" "Certificate Authority"
+
+# Print header separator
+printf "%$(($COL1+$COL2+$COL3+$COL4+$COL5+10))s\n" | tr " " "-"
 
 # Print grouped entries
 printf "\n%bValid Certificates:%b\n" "${GREEN}" "${NC}"
@@ -184,4 +185,5 @@ printf "%bValid%b - More than 30 days until expiration\n" "${GREEN}" "${NC}"
 printf "%bWARNING%b - Less than 30 days until expiration\n" "${YELLOW}" "${NC}"
 printf "%bEXPIRED%b - Certificate has expired\n\n" "${RED}" "${NC}"
 
+# Print completion message
 echo "Script has completed."
