@@ -5,7 +5,7 @@ Bash script to check validity of website certificates provided via list. Outputs
 
 
 Download bash script, drop it in safe place ~/Documents/Scripts is usually a good idea
-Make executable: chmod +x certchecker.sh
+Make executable: chmod +x certcheck.sh
 
 Populate the url.txt with your desired urls, each on a new line.
 examples included
