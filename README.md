@@ -15,6 +15,9 @@ www.amazon.com
 https://wikipedia.org
 
 
+# how to run
+./certcheck.sh urls.txt
+
 Sample output
 
 SSL Certificate Status Report
