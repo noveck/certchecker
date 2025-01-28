@@ -18,7 +18,7 @@ https://wikipedia.org
 # how to run
 ./certcheck.sh urls.txt
 
-Sample output
+# Sample output
 
 SSL Certificate Status Report
 
